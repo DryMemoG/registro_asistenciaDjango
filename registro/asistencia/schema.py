@@ -16,7 +16,7 @@ class ActividadNode(DjangoObjectType):
         model = Actividad
         filter_fields = {'nombre':['exact','icontains', 'istartswith'],
         'fecha':['exact'],}
-        interfaces = (relay.Node)
+        interfaces = (relay.Node,)
         
 class EstudianteNode(DjangoObjectType):
     class Meta:
@@ -25,17 +25,17 @@ class EstudianteNode(DjangoObjectType):
         'apellidos': ['exact','icontains','istartswith'],
         'grado':['exact'],
         }
-        interfaces = (relay.Node)
+        interfaces = (relay.Node,)
 
 class AsistenciaNode(DjangoObjectType):
     class Meta:
         model = Asistencia
         filter_fields = {'nombre' :['exact','icontains', 'istartswith'],
-        'alumno':['exact','icontains', 'istartswith'],
-        'actividad':['exact','icontains', 'istartswith'],
+        'alumno':['exact'],
+        'actividad':['exact'],
         'reporte':['icontains'],
         }
-        interfaces = (relay.Node)
+        interfaces = (relay.Node,)
 
 class Query(graphene.ObjectType):
     grado = relay.Node.Field(GradoNode)
