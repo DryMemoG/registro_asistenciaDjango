@@ -3,12 +3,12 @@ from graphene import relay, ObjectType
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 
-from asistencia.models import Grado, Actividad, Estudiante,Asistencia
+from asistencia.models import Grado, Actividad, Estudiante, Asistencia
 
 class GradoNode(DjangoObjectType):
     class Meta:
         model = Grado
-        filter_fields = {'nombre'}
+        filter_fields = ['nombre']
         interfaces = (relay.Node,)
         
 class ActividadNode(DjangoObjectType):
