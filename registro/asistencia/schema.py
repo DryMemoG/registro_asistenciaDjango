@@ -49,3 +49,44 @@ class Query(graphene.ObjectType):
     
     asistencia = relay.Node.Field(AsistenciaNode)
     all_asistencias = DjangoFilterConnectionField(AsistenciaNode)
+
+class ActividadModel(DjangoObjectType):
+    class Meta:
+        model = Actividad
+        
+class ActividadCrear(graphene.Mutation):
+    actividad = graphene.Field(ActividadModel)
+    
+    class Arguments:
+        nombre= graphene.String(required=True)
+        fecha = graphene.Date(required=True)
+    
+    def mutate(self, info, nombre, fecha):
+        actividad = Actividad(nombre = nombre, fecha= fecha)
+        actividad.save()
+        return ActividadCrear(actividad=actividad)
+
+class AsistenciaModel(DjangoObjectType):
+    class Meta:
+        model = Asistencia
+        
+class AsistenciaCrear(graphene.Mutation):
+    asistencia = graphene.Field(AsistenciaModel)
+    
+    class Arguments:
+        nombre = graphene.String(required=True)
+        alumno = graphene.String(required=True)
+        actividad = graphene.String(required=True)
+        reporte = graphene.String(required=True)
+        
+    def mutate(self, info, nombre,alumno,actividad,reporte):
+        alumno = Estudiante.objects.get(nombre= nombre)
+        actividad = Actividad.objects.get(nombre=nombre)
+        asistencia = Asistencia(nombre=nombre,alumno=alumno,actividad=actividad,reporte=reporte)
+        
+        return AsistenciaCrear(asistencia=asistencia)
+
+class Mutation(graphene.ObjectType):
+    actividad_crear = ActividadCrear.Field()
+    asistencia_crear = AsistenciaCrear.Field()
+    
