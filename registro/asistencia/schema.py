@@ -80,10 +80,10 @@ class AsistenciaCrear(graphene.Mutation):
         reporte = graphene.String(required=True)
         
     def mutate(self, info, nombre,alumno,actividad,reporte):
-        alumno = Estudiante.objects.get(nombre= nombre)
-        actividad = Actividad.objects.get(nombre=nombre)
+        alumno = Estudiante.objects.get(Estudiante=alumno)
+        actividad = Actividad.objects.get(Actividad=actividad)
         asistencia = Asistencia(nombre=nombre,alumno=alumno,actividad=actividad,reporte=reporte)
-        
+        asistencia.save()
         return AsistenciaCrear(asistencia=asistencia)
 
 class Mutation(graphene.ObjectType):
