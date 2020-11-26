@@ -12,10 +12,10 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          3ro Parcial Guillermo Galindo
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        
       </q-toolbar>
     </q-header>
 

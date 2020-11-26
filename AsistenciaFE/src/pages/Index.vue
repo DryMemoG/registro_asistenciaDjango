@@ -10,6 +10,7 @@
       color="amber"
     />
   </div>
+  <a href="#/asistencia">  <q-btn color="primary" label="Generar asistencia"/></a>
   </q-page>
 </template>
 
